@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use common\models\Clientes;
 use Yii;
 use yii\base\Model;
 use common\models\User;
@@ -15,6 +16,12 @@ class SignupForm extends Model
     public $email;
     public $password;
 
+    public $nome;
+    public $localidade;
+    public $telefone;
+    public $nif;
+    public $codigoPostal;
+    public $rua;
 
     /**
      * {@inheritdoc}
@@ -24,17 +31,37 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este nome de utilizador já existe.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este endereço de email já se encontra registado!.'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+
+            ['nome', 'required'],
+            ['nome', 'string', 'max' => 255],
+
+            ['codigopostal', 'required'],
+            ['codigopostal', 'string', 'min' => 8, 'max' => 8],
+
+            ['telefone', 'trim'],
+            ['telefone', 'required'],
+            ['telefone', 'string', 'min' => 0, 'max' => 9],
+
+            ['localidade', 'required'],
+            ['localidade', 'string', 'min' => 3, 'max' => 100],
+
+            ['rua', 'required'],
+            ['rua', 'string', 'min' => 3, 'max' => 100],
+
+            ['nif', 'trim'],
+            ['nif', 'unique', 'min' => 0, 'max' => 9],
+            ['nif', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este NIF já está em utilização!.'],
         ];
     }
 
@@ -56,7 +83,21 @@ class SignupForm extends Model
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
 
-        return $user->save() && $this->sendEmail($user);
+        $cliente = new Clientes();
+        $cliente->user_id = $user->id;
+        $cliente->nome = $this->nome;
+        $cliente->codigopostal = $this->codigoPostal;
+        $cliente ->localidade = $this->localidade;
+        $cliente->telefone = $this->telefone;
+        $cliente->nif = $this->nif;
+        $cliente->rua = $this->rua;
+
+        $auth = Yii::$app->authManager;
+        $clienteRole = $auth->getRole('cliente');
+        $auth->assign($clienteRole, $user->getId());
+
+        return $user->save() && $cliente->save();
+        //&& $this->sendEmail($user)
     }
 
     /**

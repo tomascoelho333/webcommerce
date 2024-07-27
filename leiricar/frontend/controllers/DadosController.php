@@ -30,7 +30,7 @@ class DadosController extends \yii\web\Controller
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => Dados_Clientes::find(),
+            'query' => Clientes::find(),
         ]);
 
         return $this->render('index', [

@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a8c73fa-db3d-4030-92d4-108995bbab92" name="Changes" comment="Yii2 gerado.">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webcommerce.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webcommerce.iml" afterDir="false" />
+    <list default="true" id="6a8c73fa-db3d-4030-92d4-108995bbab92" name="Changes" comment="Models e Controllers criados.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leiricar/common/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/leiricar/common/models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leiricar/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/leiricar/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leiricar/backend/views/site/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/leiricar/backend/views/site/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leiricar/frontend/controllers/DadosController.php" beforeDir="false" afterPath="$PROJECT_DIR$/leiricar/frontend/controllers/DadosController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leiricar/frontend/controllers/SiteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/leiricar/frontend/controllers/SiteController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leiricar/frontend/models/SignupForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/leiricar/frontend/models/SignupForm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leiricar/frontend/views/site/signup.php" beforeDir="false" afterPath="$PROJECT_DIR$/leiricar/frontend/views/site/signup.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +183,7 @@
       <option name="presentableId" value="Default" />
       <updated>1722088218517</updated>
       <workItem from="1722088219818" duration="2897000" />
-      <workItem from="1722098464747" duration="3157000" />
+      <workItem from="1722098464747" duration="7790000" />
     </task>
     <task id="LOCAL-00001" summary="Yii2 gerado.">
       <created>1722088419457</created>
@@ -198,7 +199,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722088683521</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Models e Controllers criados.">
+      <option name="closed" value="true" />
+      <created>1722101757060</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1722101757060</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -206,6 +215,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Yii2 gerado." />
-    <option name="LAST_COMMIT_MESSAGE" value="Yii2 gerado." />
+    <MESSAGE value="Models e Controllers criados." />
+    <option name="LAST_COMMIT_MESSAGE" value="Models e Controllers criados." />
   </component>
 </project>
