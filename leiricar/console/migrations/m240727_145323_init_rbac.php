@@ -60,8 +60,8 @@ class m240727_145323_init_rbac extends Migration
         $auth->add($realizarCompras);
 
         $realizarAvaliacoes = $auth->createPermission('realizarAvaliacoes');
-        $realizarCompras ->description = 'Fazer Avaliacoes';
-        $auth->add($realizarCompras);
+        $realizarAvaliacoes ->description = 'Fazer Avaliacoes';
+        $auth->add($realizarAvaliacoes);
 
         $cliente = $auth->createRole('cliente');
         $auth->add($cliente);
