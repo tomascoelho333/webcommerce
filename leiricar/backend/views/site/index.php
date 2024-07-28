@@ -1,49 +1,73 @@
 <?php
 
-use backend\models\User;
-use yii\helpers\Html;
+use common\models\Dados_Clientes;
 use yii\helpers\Url;
-use yii\grid\ActionColumn;
-use yii\grid\GridView;
+use yii\web\JsExpression;
+use common\models\User;
 
-/** @var yii\web\View $this */
-/** @var yii\data\ActiveDataProvider $dataProvider */
-
-$this->title = 'Users';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'LeiriCar - BackOffice';
 ?>
-<div class="user-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create User', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+<div class="col-lg-6">
+    <?= \hail812\adminlte\widgets\BemVindo::widget([
+        'type' => 'success',
+        'body' => "Username: ". Yii::$app->user->identity->username. "!",
+    ]) ?>
+</div>
 
-            'id',
-            'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
-            //'email:email',
-            //'status',
-            //'created_at',
-            //'updated_at',
-            //'verification_token',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, User $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
+<div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+        <?= \hail812\adminlte\widgets\SmallBox::widget([
+            'title' => 'Ainda por fazer',
+            'text' => 'Funcionários Registados',
+            'icon' => 'fas fa-user-plus',
+            'linkText' => 'Ver Funcionários',
+            'linkUrl' => Url::toRoute(["/user"]),
+        ]) ?>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+        <?= \hail812\adminlte\widgets\SmallBox::widget([
+            'title' => 'Ainda por fazer',
+            'text' => 'Clientes Registados',
+            'icon' => 'fas fa-user-plus',
+            'linkText' => 'Ver Clientes',
+            'linkUrl' => Url::toRoute(["/clientes"]),
+        ]) ?>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+        <?= \hail812\adminlte\widgets\SmallBox::widget([
+            'title' => 'Ainda por fazer',
+            'text' => 'Produtos Registados',
+            'icon' => 'fas fa-tag',
+            'linkText' => 'Ver Produtos',
+            'linkUrl' => Url::toRoute(["/produtos"]),
+        ]) ?>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+        <?= \hail812\adminlte\widgets\SmallBox::widget([
+           'title' => 'Ainda por fazer',
+            'text' => 'Categorias',
+            'icon' => 'fas fa-industry',
+            'linkText' => 'Ver Categorias',
+        ]) ?>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+        <?= \hail812\adminlte\widgets\SmallBox::widget([
+            'title' => 'Ainda por fazer',
+            'text' => 'Stocks',
+            'icon' => 'fas fa-home',
+            'linkText' => 'Consultar Stocks',
+        ]) ?>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+        <?= \hail812\adminlte\widgets\SmallBox::widget([
+            'title' => 'Ainda por fazer',
+            'text' => 'Número de Marcas',
+            'icon' => 'fas fa-industry',
+            'linkText' => 'Ver Marcas',
+        ]) ?>
+    </div>
 
 
 </div>

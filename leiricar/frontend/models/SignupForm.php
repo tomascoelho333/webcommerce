@@ -15,13 +15,13 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
-
     public $nome;
     public $localidade;
+    public $codPostal;
     public $telefone;
     public $nif;
-    public $codigoPostal;
-    public $rua;
+    public $morada;
+
 
     /**
      * {@inheritdoc}
@@ -31,37 +31,40 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este nome de utilizador já existe.'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Esse username já está a ser utilizado.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este endereço de email já se encontra registado!.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Esse username já está a ser utilizado.'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
+            ['nome', 'trim'],
             ['nome', 'required'],
-            ['nome', 'string', 'max' => 255],
 
-            ['codigopostal', 'required'],
-            ['codigopostal', 'string', 'min' => 8, 'max' => 8],
+            ['localidade', 'trim'],
+            ['localidade', 'required'],
+
+            ['codPostal', 'trim'],
+            ['codPostal', 'required'],
+            ['codPostal', 'match', 'pattern' => '^\d{4}-\d{3}?$^', 'message' => 'Código postal inválido!'],
 
             ['telefone', 'trim'],
             ['telefone', 'required'],
-            ['telefone', 'string', 'min' => 0, 'max' => 9],
-
-            ['localidade', 'required'],
-            ['localidade', 'string', 'min' => 3, 'max' => 100],
-
-            ['rua', 'required'],
-            ['rua', 'string', 'min' => 3, 'max' => 100],
+            ['telefone', 'match', 'pattern' => '^\d{9}?$^', 'message' => 'Numero de telemóvel inválido!'],
+            ['telefone', 'string', 'max' => 9, 'message' => 'Numero de telemóvel inválido!'],
 
             ['nif', 'trim'],
-            ['nif', 'unique', 'min' => 0, 'max' => 9],
-            ['nif', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Este NIF já está em utilização!.'],
+            ['nif', 'required'],
+            ['nif', 'match', 'pattern' => '^\d{9}?$^', 'message' => 'NIF inválido'],
+            ['nif', 'string', 'max' => 9, 'message' => 'NIF inválido'],
+
+            ['morada', 'trim'],
+            ['morada', 'required'],
         ];
     }
 
@@ -75,47 +78,45 @@ class SignupForm extends Model
         if (!$this->validate()) {
             return null;
         }
-        
+
+
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
+        $user->save();
 
-        $cliente = new Clientes();
-        $cliente->user_id = $user->id;
-        $cliente->nome = $this->nome;
-        $cliente->codigopostal = $this->codigoPostal;
-        $cliente ->localidade = $this->localidade;
-        $cliente->telefone = $this->telefone;
-        $cliente->nif = $this->nif;
-        $cliente->rua = $this->rua;
+        $dados = new Clientes();
+        $dados->user_id = $user->id;
+        $dados->nome = $this->nome;
+        $dados->codigopostal = $this->codPostal;
+        $dados->localidade = $this->localidade;
+        $dados->telefone = $this->telefone;
+        $dados->nif = $this->nif;
+        $dados->rua = $this->morada;
+        $dados->save();
 
-        $auth = Yii::$app->authManager;
+        /*if (!$dados->save()) {
+           // Se houver erros ao guardar
+         //  $errors = $dados->getErrors();
+           var_dump( $dados->user_id = $user->id,
+            $dados->nome = $this->nome,
+            $dados->codigopostal = $this->codPostal,
+            $dados->localidade = $this->localidade,
+            $dados->telefone = $this->telefone,
+            $dados->nif = $this->nif,
+            $dados->rua = $this->morada,
+            $dados->save() );
+           die();
+       }*/
+
+
+        $auth = \Yii::$app->authManager;
         $clienteRole = $auth->getRole('cliente');
         $auth->assign($clienteRole, $user->getId());
 
-        return $user->save() && $cliente->save();
-        //&& $this->sendEmail($user)
-    }
-
-    /**
-     * Sends confirmation email to user
-     * @param User $user user model to with email should be send
-     * @return bool whether the email was sent
-     */
-    protected function sendEmail($user)
-    {
-        return Yii::$app
-            ->mailer
-            ->compose(
-                ['html' => 'emailVerify-html', 'text' => 'emailVerify-text'],
-                ['user' => $user]
-            )
-            ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
-            ->setTo($this->email)
-            ->setSubject('Account registration at ' . Yii::$app->name)
-            ->send();
+        return $user;
     }
 }

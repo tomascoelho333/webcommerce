@@ -80,7 +80,16 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            if (Yii::$app->user->can('admin') || Yii::$app->user->can('funcionario') ) {
+                return $this->goHome();
+            }
+            else{
+                Yii::$app->user->logout();
+                Yii::$app->session->setFlash('error', 'Sem permissão para aceder a esta area!');
+                return $this->refresh();
+
+            }
+
         }
 
         $model->password = '';

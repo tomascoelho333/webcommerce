@@ -104,6 +104,10 @@
       <excludeFolder url="file://$MODULE_DIR$/leiricar/vendor/yiisoft/yii2-faker" />
       <excludeFolder url="file://$MODULE_DIR$/leiricar/vendor/yiisoft/yii2-gii" />
       <excludeFolder url="file://$MODULE_DIR$/leiricar/vendor/yiisoft/yii2-symfonymailer" />
+      <excludeFolder url="file://$MODULE_DIR$/leiricar/vendor/doctrine/deprecations" />
+      <excludeFolder url="file://$MODULE_DIR$/leiricar/vendor/codeception/phpunit-wrapper" />
+      <excludeFolder url="file://$MODULE_DIR$/leiricar/vendor/symfony/polyfill-php73" />
+      <excludeFolder url="file://$MODULE_DIR$/leiricar/vendor/symfony/polyfill-php80" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
