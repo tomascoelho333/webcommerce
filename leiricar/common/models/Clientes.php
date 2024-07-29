@@ -40,7 +40,7 @@ class Clientes extends \yii\db\ActiveRecord
             [['nome'], 'string', 'max' => 255],
             [['codigopostal'], 'string', 'max' => 8],
             [['localidade', 'rua'], 'string', 'max' => 100],
-            [['nif'], 'string', 'max' => 10, 'message'],
+            [['nif'], 'string', 'max' => 10],
             [['telefone'], 'string', 'max' => 12],
             [['nif'], 'unique'],
             ['codigopostal', 'match', 'pattern' => '^\d{4}-\d{3}?$^', 'message' => 'Código de Postal Inválido'],
